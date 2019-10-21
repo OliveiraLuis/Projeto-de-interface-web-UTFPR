@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Gerenciar Aviões', subtitle: 'Cadastre e consulte aviões' });
+  res.render('aviao/index', { title: 'Gerenciar Aviões', subtitle: 'Cadastre e consulte aviões' });
 });
 
 router.get('/cadastrar', function(req, res) {
-    res.render('index', { title: 'Cadastrar Aviões', subtitle: 'Adicionar um novo avião para nossa base' });
+    res.render('aviao/cadastrar', { title: 'Cadastrar Aviões', subtitle: 'Adicionar um novo avião para nossa base' });
 });
 
 router.get('/consultar', function(req, res) {
