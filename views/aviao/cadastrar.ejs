@@ -12,12 +12,13 @@
       </div>
     </div>
 
+    <form action="/aviao/cadastrar" method="POST" id="aviao"></form>
     <div class="columns">
       <div class="column is-one-quarter"></div>
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="number" placeholder="Número de registro do avião">
+            <input form="aviao" name="registro" class="input" type="number" placeholder="Número de registro do avião">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -27,7 +28,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left has-icons-right">
-            <input class="input" type="text" placeholder="Modelo">
+            <input form="aviao" name="modelo" class="input" type="text" placeholder="Modelo">
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -45,7 +46,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="number" placeholder="Quantidade de assentos">
+            <input form="aviao" name="qtdAssentos" class="input" type="number" placeholder="Quantidade de assentos">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -55,7 +56,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="number" placeholder="Quantidade de assentos especiais">
+            <input form="aviao" name="qtdAssentosEspeciais" class="input" type="number" placeholder="Quantidade de assentos especiais">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -67,10 +68,14 @@
 
     <div class="columns">
       <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><button class="button is-success is-medium">Enviar</button></div>
+      <div class="column is-one-quarter"><button form="aviao"  type="submit" class="button is-success is-medium">Enviar</button></div>
       <div class="column is-one-quarter"></div>
       <div class="column is-one-quarter"></div>
     </div>
 </body>
-
+<script>
+  function enviar() {
+    fetch('', { method: 'POST', body: {}})
+  }
+</script>
 <%- include ../footer -%>

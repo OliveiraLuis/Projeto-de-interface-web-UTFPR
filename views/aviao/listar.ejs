@@ -1,0 +1,11 @@
+<%- include ../header -%>
+
+<body>
+  <ul>
+    <% avioes.forEach( function(aviao) { %>
+      <ol><%= aviao.modelo %></ol>
+    <% }); %>
+    </ul>
+</body>
+
+<%- include ../footer -%>
