@@ -1,11 +1,51 @@
 <%- include ../header -%>
 
 <body>
-  <ul>
-    <% avioes.forEach( function(aviao) { %>
-      <ol><%= aviao.modelo %></ol>
-    <% }); %>
-    </ul>
-</body>
 
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Registro</th>
+            <th>Modelo</th>
+            <th>Assentos</th>
+            <th>Assentos E speciais</th>
+            <th>Excluír</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Registro</th>
+            <th>Modelo</th>
+            <th>Assentos</th>
+            <th>Assentos E speciais</th>
+            <th>Excluír</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% avioes.forEach(function(aviao){ %>
+          <tr>
+            <td> <%= aviao.registro %> </td>
+            <td> <%= aviao.modelo %> </td>
+            <td> <%= aviao.qtdAssentos %> </td>
+            <td> <%= aviao.qtdAssentosEspeciais %> </td>
+            <td> <a onclick="excluir(<%= aviao.registro %>)"class="delete is-small"></a> </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div class="column"></div>
+  </div>
+</body>
+<script>
+  async function excluir(registro) {
+
+    console.log(registro)
+    await fetch(`/aviao/excluir/${registro}`, { method: 'DELETE' })
+    window.location.reload(true)
+  }
+</script>
 <%- include ../footer -%>
