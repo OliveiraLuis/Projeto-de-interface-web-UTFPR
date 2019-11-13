@@ -12,8 +12,7 @@
       </div>
     </div>
 
-    <form action="/aviao/cadastrar" method="POST" id="cadastrar"></form>
-    <form action="/aviao/editar" method="POST" id="editar"></form>
+    <form action="/aviao/<%= aviao.registro ? 'editar': 'cadastrar' %>" method="POST" id="<%= aviao.registro ? 'editar': 'cadastrar' %>"></form>
     <div class="columns">
       <div class="column is-one-quarter"></div>
       <div class="column">
@@ -30,7 +29,7 @@
         <div class="field">
           <p class="control has-icons-left has-icons-right">
             <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" name="modelo" class="input" type="text" placeholder="Modelo" value="<%= aviao.modelo %>">
-            <span class="icon is-small is-left">
+            <span class="icon is-small is-left">  
               <i class="fas fa-envelope"></i>
             </span>
             <span class="icon is-small is-right">
@@ -71,7 +70,6 @@
       <div class="column is-one-quarter"></div>
       <div class="column is-one-quarter">
         <% if (aviao.registro) { %>
-          <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="hidden" value="editar">
           <button form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="submit" class="button is-success is-medium">Editar</button>
         <% } else { %>
           <button form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="submit" class="button is-success is-medium">Enviar</button>
