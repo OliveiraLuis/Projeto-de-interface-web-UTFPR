@@ -27,11 +27,11 @@
         <tbody>
           <% avioes.forEach(function(aviao){ %>
           <tr>
-            <td> <%= aviao.registro %> </td>
-            <td> <%= aviao.modelo %> </td>
-            <td> <%= aviao.qtdAssentos %> </td>
-            <td> <%= aviao.qtdAssentosEspeciais %> </td>
-            <td> <a onclick="excluir(<%= aviao.registro %>)"class="delete is-small"></a> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= aviao.registro %>)"> <%= aviao.registro %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= aviao.registro %>)"> <%= aviao.modelo %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= aviao.registro %>)"> <%= aviao.qtdAssentos %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= aviao.registro %>)"> <%= aviao.qtdAssentosEspeciais %> </td>
+            <td> <a onclick="excluir(<%= aviao.registro %>)" class="delete is-small"></a> </td>
           </tr>
           <% }); %>
         </tbody>
@@ -42,10 +42,11 @@
 </body>
 <script>
   async function excluir(registro) {
+    window.location.replace(`/aviao/excluir/${registro}`)
+  }
 
-    console.log(registro)
-    await fetch(`/aviao/excluir/${registro}`, { method: 'DELETE' })
-    window.location.reload(true)
+  function editar(registro) {
+    window.location.replace(`/aviao/editar/${registro}`)
   }
 </script>
 <%- include ../footer -%>

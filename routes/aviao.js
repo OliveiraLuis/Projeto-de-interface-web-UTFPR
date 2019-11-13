@@ -2,35 +2,48 @@ const express = require('express')
 const router = express.Router()
 const Crud = require('../models/Crud')
 
-router.get('/', function(req, res) {
-  res.render('aviao/index', { title: 'Gerenciar Aviões', subtitle: 'Cadastre e consulte aviões' });
-});
+router.get('/', (req, res) => {
+  res.render('aviao/index', { title: 'Gerenciar Aviões', subtitle: 'Cadastre e consulte aviões' })
+})
 
-router.get('/cadastrar', function(req, res) {
-    res.render('aviao/cadastrar', { title: 'Cadastrar Aviões', subtitle: 'Adicionar um novo avião para nossa base' });
-});
+router.get('/cadastrar', (req, res) => {
+    res.render('aviao/cadastrar', { title: 'Cadastrar Aviões', subtitle: 'Adicionar um novo avião para nossa base', aviao: {} })
+})
 
 router.get('/consultar', async (req, res) => {
     const aviao = new Crud('aviao')
-    
-    res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Verificar aviões cadastrados e tratar suas informações', avioes: await aviao.find() });
-});
 
-router.post('/cadastrar', function(req, res) {
+    res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Verificar aviões cadastrados e tratar suas informações', avioes: await aviao.find() })
+})
+
+router.post('/cadastrar', (req, res) => {
     const aviao = new Crud('aviao')
 
     aviao.insert(req.body)
-    res.render('aviao/cadastrar', { title: 'Cadastrar Aviões', subtitle: 'Avião cadastrado com sucesso' });
-});
+    res.render('aviao/cadastrar', { title: 'Cadastrar Aviões', subtitle: 'Avião cadastrado com sucesso', aviao: {} })
+})
 
-router.put('/editar', function(req, res) {
-    res.send('Not implemented yet');
-});
-
-router.delete('/excluir/:registro?', async (req, res) => {
+router.get('/editar/:registro?', async (req, res) => {
     const aviao = new Crud('aviao')
 
-    aviao.remove({registro: req.params.registro})
-    res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Avião removido com sucesso', avioes: await aviao.find() });
-});
-module.exports = router;
+    res.render('aviao/cadastrar', {
+        title: 'Editar avião',
+        subtitle: `Edite o avião de registro nº ${req.params.registro}`,
+        aviao: await aviao.find({registro: req.params.registro})
+    })
+})
+
+router.post('/editar', async (req, res) => {
+    const aviao = new Crud('aviao')
+
+    await aviao.update(req.body)
+    res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Avião editado com sucesso', avioes: await aviao.find() })
+})
+
+router.get('/excluir/:registro?', async (req, res) => {
+    const aviao = new Crud('aviao')
+
+    await aviao.remove({registro: req.params.registro})
+    res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Avião removido com sucesso', avioes: await aviao.find() })
+})
+module.exports = router

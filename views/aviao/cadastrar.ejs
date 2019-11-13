@@ -12,13 +12,14 @@
       </div>
     </div>
 
-    <form action="/aviao/cadastrar" method="POST" id="aviao"></form>
+    <form action="/aviao/cadastrar" method="POST" id="cadastrar"></form>
+    <form action="/aviao/editar" method="POST" id="editar"></form>
     <div class="columns">
       <div class="column is-one-quarter"></div>
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="aviao" name="registro" class="input" type="number" placeholder="Número de registro do avião">
+            <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" name="registro" class="input" type="number" placeholder="Número de registro do avião" value="<%= aviao.registro %>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -28,7 +29,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left has-icons-right">
-            <input form="aviao" name="modelo" class="input" type="text" placeholder="Modelo">
+            <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" name="modelo" class="input" type="text" placeholder="Modelo" value="<%= aviao.modelo %>">
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -46,7 +47,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="aviao" name="qtdAssentos" class="input" type="number" placeholder="Quantidade de assentos">
+            <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" name="qtdAssentos" class="input" type="number" placeholder="Quantidade de assentos" value="<%= aviao.qtdAssentos %>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -56,7 +57,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="aviao" name="qtdAssentosEspeciais" class="input" type="number" placeholder="Quantidade de assentos especiais">
+            <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" name="qtdAssentosEspeciais" class="input" type="number" placeholder="Quantidade de assentos especiais" value="<%= aviao.qtdAssentosEspeciais %>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -68,7 +69,14 @@
 
     <div class="columns">
       <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><button form="aviao"  type="submit" class="button is-success is-medium">Enviar</button></div>
+      <div class="column is-one-quarter">
+        <% if (aviao.registro) { %>
+          <input form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="hidden" value="editar">
+          <button form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="submit" class="button is-success is-medium">Editar</button>
+        <% } else { %>
+          <button form="<%= aviao.registro ? 'editar': 'cadastrar' %>" type="submit" class="button is-success is-medium">Enviar</button>
+        <% } %>
+      </div>
       <div class="column is-one-quarter"></div>
       <div class="column is-one-quarter"></div>
     </div>
