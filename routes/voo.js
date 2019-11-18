@@ -9,8 +9,9 @@ router.get('/cadastrar', (req, res) => {
     res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Adicionar um novo voo para nossa base' });
 });
 
-router.get('/consultar', (req, res) => {
-    res.render('index', { title: 'Listar voos', subtitle: 'Verificar voos cadastrados e tratar suas informações' });
+router.get('/consultar', async (req, res) => {
+    const voo = new Crud('voo')
+    res.render('voo/listar', { title: 'Listar voos', subtitle: 'Verificar voos cadastrados e tratar suas informações', voos: await voo.find() });
 });
 
 router.post('/cadastrar', (req, res) => {

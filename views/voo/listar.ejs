@@ -1,0 +1,55 @@
+<%- include ../header -%>
+
+<body>
+
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column is-three-fifths">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Data Viagem</th>
+            <th>Número do Voo</th>
+            <th>Saída</th>
+            <th>Destino</th>
+            <th>Valor / Desconto</th>
+            <th>Excluír</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Data Viagem</th>
+            <th>Número do Voo</th>
+            <th>Saída</th>
+            <th>Destino</th>
+            <th>Valor / Desconto</th>
+            <th>Excluír</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% voos.forEach(function(voo){ %>
+          <tr>
+            <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.dtViagem %> H <%= voo.hora %></td>
+            <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.numeroVoo %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.partida %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.destino %> </td>
+            <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> R$ <%= voo.valor %> / <%= voo.valorEspecial %> </td>
+            <td> <a onclick="excluir(<%= voo.numeroVoo %>)" class="delete is-small"></a> </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <div class="column"></div>
+  </div>
+</body>
+<script>
+  async function excluir(numVoo) {
+    window.location.replace(`/voo/excluir/${numVoo}`)
+  }
+
+  function editar(numVoo) {
+    window.location.replace(`/voo/editar/${numVoo}`)
+  }
+</script>
+<%- include ../footer -%>
