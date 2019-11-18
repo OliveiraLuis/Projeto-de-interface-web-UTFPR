@@ -12,12 +12,13 @@
       </div>
     </div>
 
+    <form action="/voo/cadastrar" method="POST" id="cadastrar"></form>
     <div class="columns">
       <div class="column is-one-quarter"></div>
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="date" placeholder="Data da viagem">
+            <input form="cadastrar" class="input" name="dtViagem" type="date" placeholder="Data da viagem">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -27,7 +28,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left has-icons-right">
-            <input class="input" type="number" placeholder="Número do voo">
+            <input form="cadastrar" class="input" name="numeroVoo" type="number" placeholder="Número do voo">
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -45,7 +46,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="text" placeholder="Horário de viagem">
+            <input form="cadastrar" class="input" name="partida" type="text" placeholder="Local de partida">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -55,32 +56,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="text" placeholder="Local de partida">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-      </div>
-      <div class="column"></div>
-    </div>
-
-    <div class="columns">
-      <div class="column is-one-quarter"></div>
-      <div class="column">
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="text" placeholder="Local de destino">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="number" step="0.01" placeholder="Valor passagem normal">
+            <input form="cadastrar" class="input" type="text" name="destino" placeholder="Local de destino">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -95,7 +71,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Horário de viagem">
+              <input form="cadastrar" class="input" name="hora" type="text" placeholder="Horário de viagem">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -105,7 +81,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Local de partida">
+              <input form="cadastrar" class="input" type="number" name="valor" step="0.01" placeholder="Valor passagem normal">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -123,7 +99,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="number" step="0.01" placeholder="Valor passagem especial">
+              <input form="cadastrar" class="input" type="number" name="valorEspecial" step="0.01" placeholder="Valor passagem especial">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -135,7 +111,7 @@
 
     <div class="columns">
       <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><button class="button is-success is-medium">Enviar</button></div>
+      <div class="column is-one-quarter"><button form="cadastrar" type="submit" class="button is-success is-medium">Enviar</button></div>
       <div class="column is-one-quarter"></div>
       <div class="column is-one-quarter"></div>
     </div>

@@ -1,27 +1,30 @@
-var express = require('express');
-var router = express.Router();
+const router = require('express').Router()
+const Crud = require('../models/Crud')
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.render('voo/index', { title: 'Gerenciar Voos', subtitle: 'Cadastre e consulte voos' });
 });
 
-router.get('/cadastrar', function(req, res) {
+router.get('/cadastrar', (req, res) => {
     res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Adicionar um novo voo para nossa base' });
 });
 
-router.get('/consultar', function(req, res) {
+router.get('/consultar', (req, res) => {
     res.render('index', { title: 'Listar voos', subtitle: 'Verificar voos cadastrados e tratar suas informações' });
 });
 
-router.post('/cadastrar', function(req, res) {
+router.post('/cadastrar', (req, res) => {
+    const voo = new Crud('voo')
+
+    voo.insert(req.body)
+    res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Voo cadastrado com sucesso', voo: {} })
+});
+
+router.put('/editar', (req, res) => {
     res.send('Not implemented yet');
 });
 
-router.put('/editar', function(req, res) {
+router.delete('/excluir', (req, res) => {
     res.send('Not implemented yet');
 });
-
-router.delete('/excluir', function(req, res) {
-    res.send('Not implemented yet');
-});
-module.exports = router;
+module.exports = router;    
