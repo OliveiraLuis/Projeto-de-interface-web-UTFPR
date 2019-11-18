@@ -12,13 +12,13 @@
       </div>
     </div>
 
-    <form action="/voo/cadastrar" method="POST" id="cadastrar"></form>
+    <form action="/voo/<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" method="POST" id="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>"></form>
     <div class="columns">
       <div class="column is-one-quarter"></div>
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="cadastrar" class="input" name="dtViagem" type="date" placeholder="Data da viagem">
+            <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" name="dtViagem" type="date" placeholder="Data da viagem" value="<%= voo.dtViagem || ''%>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -28,7 +28,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left has-icons-right">
-            <input form="cadastrar" class="input" name="numeroVoo" type="number" placeholder="Número do voo">
+            <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" name="numeroVoo" type="number" placeholder="Número do voo" value="<%= voo.numeroVoo || ''%>">
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -46,7 +46,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="cadastrar" class="input" name="partida" type="text" placeholder="Local de partida">
+            <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" name="partida" type="text" placeholder="Local de partida" value="<%= voo.partida || ''%>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -56,7 +56,7 @@
       <div class="column">
         <div class="field">
           <p class="control has-icons-left">
-            <input form="cadastrar" class="input" type="text" name="destino" placeholder="Local de destino">
+            <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" type="text" name="destino" placeholder="Local de destino" value="<%= voo.destino || ''%>">
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -71,7 +71,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input form="cadastrar" class="input" name="hora" type="text" placeholder="Horário de viagem">
+              <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" name="hora" type="text" placeholder="Horário de viagem" value="<%= voo.hora || ''%>">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -81,7 +81,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input form="cadastrar" class="input" type="number" name="valor" step="0.01" placeholder="Valor passagem normal">
+              <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" type="number" name="valor" step="0.01" placeholder="Valor passagem normal" value="<%= voo.valor || ''%>">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -99,7 +99,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input form="cadastrar" class="input" type="number" name="valorEspecial" step="0.01" placeholder="Valor passagem especial">
+              <input form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" class="input" type="number" name="valorEspecial" step="0.01" placeholder="Valor passagem especial" value="<%= voo.valorEspecial || ''%>">
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -111,7 +111,9 @@
 
     <div class="columns">
       <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><button form="cadastrar" type="submit" class="button is-success is-medium">Enviar</button></div>
+      <div class="column is-one-quarter">
+        <button form="<%= voo.numeroVoo ? 'editar': 'cadastrar' %>" type="submit" class="button is-success is-medium"><%= voo.numeroVoo ? 'Editar': 'Enviar' %></button>
+      </div>
       <div class="column is-one-quarter"></div>
       <div class="column is-one-quarter"></div>
     </div>

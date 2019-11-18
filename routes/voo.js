@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cadastrar', (req, res) => {
-    res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Adicionar um novo voo para nossa base' });
+    res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Adicionar um novo voo para nossa base', voo: {} });
 });
 
 router.get('/consultar', async (req, res) => {
@@ -14,21 +14,27 @@ router.get('/consultar', async (req, res) => {
     res.render('voo/listar', { title: 'Listar voos', subtitle: 'Verificar voos cadastrados e tratar suas informações', voos: await voo.find() });
 });
 
-router.post('/cadastrar', (req, res) => {
+router.get('/editar/:numeroVoo?', async (req, res) => {
     const voo = new Crud('voo')
 
-    voo.insert(req.body)
-    res.render('voo/cadastrar', { title: 'Cadastrar Voos', subtitle: 'Voo cadastrado com sucesso', voo: {} })
-});
+    res.render('voo/cadastrar', {
+        title: 'Editar voo',
+        subtitle: `Edite o voo de nº ${req.params.numeroVoo}`,
+        voo: await voo.find({numeroVoo: req.params.numeroVoo})
+    })
+})
 
-router.put('/editar', (req, res) => {
-    res.send('Not implemented yet');
-});
-
-router.get('/excluir/:numVoo?', async (req, res) => {
+router.post('/editar', async (req, res) => {
     const voo = new Crud('voo')
 
-    await voo.remove({numeroVoo: req.params.numVoo})
+    await voo.update(req.body)
+    res.render('voo/listar', { title: 'Listar Voos', subtitle: 'Voo editado com sucesso', voos: await voo.find() })
+})
+
+router.get('/excluir/:numeroVoo?', async (req, res) => {
+    const voo = new Crud('voo')
+
+    await voo.remove({numeroVoo: req.params.numeroVoo})
     res.render('voo/listar', { title: 'Listar Voos', subtitle: 'Voo removido com sucesso', voos: await voo.find() })
 })
 module.exports = router;
