@@ -25,7 +25,10 @@ router.put('/editar', (req, res) => {
     res.send('Not implemented yet');
 });
 
-router.delete('/excluir', (req, res) => {
-    res.send('Not implemented yet');
-});
-module.exports = router;    
+router.get('/excluir/:numVoo?', async (req, res) => {
+    const voo = new Crud('voo')
+
+    await voo.remove({numeroVoo: req.params.numVoo})
+    res.render('voo/listar', { title: 'Listar Voos', subtitle: 'Voo removido com sucesso', voos: await voo.find() })
+})
+module.exports = router;
