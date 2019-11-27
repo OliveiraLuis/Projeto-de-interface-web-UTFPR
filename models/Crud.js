@@ -8,15 +8,19 @@ class Crud {
     return global.mongodb.collection(this._table).insertOne(data) 
   }
 
-  update(data) {
-    return global.mongodb.collection(this._table).updateOne({registro: data.registro}, { $set: data}) 
+  update(key, data) {
+    return global.mongodb.collection(this._table).updateOne({[key]: data[key]}, { $set: data}) 
   }
 
   find(filter) {
     if (filter)
-      return global.mongodb.collection(this._table).findOne(filter)
+      return global.mongodb.collection(this._table).find(filter).toArray()
   
     return global.mongodb.collection(this._table).find().toArray()
+  }
+
+  findOne(filter) {
+    return global.mongodb.collection(this._table).findOne(filter)
   }
 
   remove(data) {
