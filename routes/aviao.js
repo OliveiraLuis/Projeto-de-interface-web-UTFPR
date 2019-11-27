@@ -29,14 +29,14 @@ router.get('/editar/:registro?', async (req, res) => {
     res.render('aviao/cadastrar', {
         title: 'Editar avião',
         subtitle: `Edite o avião de registro nº ${req.params.registro}`,
-        aviao: await aviao.find({registro: req.params.registro})
+        aviao: await aviao.findOne({registro: req.params.registro})
     })
 })
 
 router.post('/editar', async (req, res) => {
     const aviao = new Crud('aviao')
 
-    await aviao.update(req.body)
+    await aviao.update("registro", req.body)
     res.render('aviao/listar', { title: 'Listar Aviões', subtitle: 'Avião editado com sucesso', avioes: await aviao.find() })
 })
 

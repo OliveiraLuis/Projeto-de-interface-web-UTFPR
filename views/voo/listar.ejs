@@ -10,6 +10,7 @@
           <tr>
             <th>Data Viagem</th>
             <th>Número do Voo</th>
+            <th>Avião</th>
             <th>Saída</th>
             <th>Destino</th>
             <th>Valor / Desconto</th>
@@ -20,6 +21,7 @@
           <tr>
             <th>Data Viagem</th>
             <th>Número do Voo</th>
+            <th>Avião</th>
             <th>Saída</th>
             <th>Destino</th>
             <th>Valor / Desconto</th>
@@ -31,6 +33,7 @@
           <tr>
             <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.dtViagem %> H <%= voo.hora %></td>
             <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.numeroVoo %> </td>
+            <td><a href="/aviao/editar/<%= voo.aviao %>"> <%= voo.aviao || '' %></a> </td>
             <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.partida %> </td>
             <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> <%= voo.destino %> </td>
             <td style="cursor: pointer;" onclick="editar(<%= voo.numeroVoo %>)"> R$ <%= voo.valor %> / <%= voo.valorEspecial %> </td>
