@@ -1,6 +1,7 @@
 <%- include ../header -%>
 
 <body>
+  <form action="/passagem/buscarVoo/" method="GET" id="buscar"></form>
   <div class="container is-widescreen">
     <div class="notification">
       <div class="columns">
@@ -13,39 +14,119 @@
     </div>
 
     <div class="columns">
-      <div class="column is-one-quarter"></div>
+      <div class="column"></div>
       <div class="column">
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <input class="input" type="number" placeholder="Número do voo">
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="date" placeholder="Data da viagem">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
+          <input form="buscar" name="dtViagem" class="input" type="date" id="dtViagem" placeholder="Data da viagem">
         </div>
       </div>
       <div class="column"></div>
     </div>
 
     <div class="columns">
-      <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"><button class="button is-info is-medium">Buscar voo</button></div>
-      <div class="column is-one-quarter"></div>
-      <div class="column is-one-quarter"></div>
+      <div class="column"></div>
+      <div class="column">
+        <button form="buscar" type="submit" class="button is-info is-medium" style="width: 100%">Buscar voos</button>
+      </div>
+      <div class="column"></div>
     </div>
-</body>
 
+
+    <% if (voos.length > 0) { %>
+    <div class="columns">
+      <form action="/passagem/comprar" method="POST" id="comprar"></form>
+      <div class="column"></div>
+      <div class="column">
+          <input type="text" disabled form="comprar" id="voo">
+          <input type="hidden" form="comprar" name="numVoo">
+      </div>
+      <div class="column">
+        <input form="comprar" name="cpf" pattern="\d{3}.\d{3}.\d{3}-\d{2}" class="input" id="dtViagem" placeholder="CPF cliente">
+      </div>
+      <div class="column"></div>
+    </div>
+    <div class="columns">
+      <div class="column"></div>
+
+      <div class="column">
+        <div class="select">
+          <select form="comprar" name="tpPassagem" required>
+            <option value="1">Valor Normal</option>
+            <option value="2">Valor Especial</option>
+          </select>
+        </div>
+      </div>
+      <div class="column">
+        <div class="select">
+          <select form="comprar" name="formaPagamento" required>
+            <option value="1">Cartão de Crédito</option>
+            <option value="2">Cartão de Débito</option>
+            <option value="3">Transferência Brancária</option>
+          </select>
+        </div>
+      </div>
+      <div class="column"></div>
+    </div>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column">
+        <button form="comprar" type="submit" class="button is-success is-medium" style="width: 100%">Comprar</button>
+      </div>
+      <div class="column"></div>
+    </div>
+
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Data Viagem</th>
+              <th>Número do Voo</th>
+              <th>Avião</th>
+              <th>Saída</th>
+              <th>Destino</th>
+              <th>Valor / Desconto</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Data Viagem</th>
+              <th>Número do Voo</th>
+              <th>Avião</th>
+              <th>Saída</th>
+              <th>Destino</th>
+              <th>Valor / Desconto</th>
+              <th>Ação</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% voos.forEach(function(voo){ %>
+            <tr>
+              <td> <%= voo.dtViagem %> H <%= voo.hora %> </td>
+              <td> <%= voo.numeroVoo %> </td>
+              <td> <%= voo.aviao || '' %></a> </td>
+              <td> <%= voo.partida %> </td>
+              <td> <%= voo.destino %> </td>
+              <td> R$ <%= voo.valor %>
+                <%= voo.valorEspecial %> </td>
+              <td> <button onclick="selecionar(<%= voo.numeroVoo %>)"
+                  class="button is-primary is-light">Selecionar</button>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <div class="column"></div>
+    </div>
+    <% } %>
+</body>
+<script>
+  function selecionar(id) {
+    document.getElementById('voo').value = id
+    document.getElementsByName('numVoo')[0].value = id
+  }
+</script>
 <%- include ../footer -%>

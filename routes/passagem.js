@@ -1,12 +1,25 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router()
+const Crud = require('../models/Crud')
 
 router.get('/', function(req, res) {
   res.render('passagem/index', { title: 'Gerenciar Passagens', subtitle: 'Compre e gerencie suas passagens' });
 });
 
+router.get('/buscarVoo/:dtViagem?', async (req, res) => {
+    const voo = new Crud('voo')
+
+    res.render('passagem/comprar', { title: 'Comprar passagem', subtitle: 'Comprar passagem para um voo', voos: await voo.find({ dtViagem: req.query.dtViagem }) });
+})
+
 router.get('/comprar', function(req, res) {
-    res.render('passagem/comprar', { title: 'Comprar passagem', subtitle: 'Comprar passagem para um voo' });
+    res.render('passagem/comprar', { title: 'Comprar passagem', subtitle: 'Comprar passagem para um voo', voos: [] });
+});
+
+router.post('/comprar', function(req, res) {
+    let passagem = new Crud('passagem')
+
+    passagem.insert(req.body)
+    res.render('passagem/comprar', { title: 'Comprar passagem', subtitle: 'Passagem comprada com sucesso', voos: [] });
 });
 
 router.get('/consultar', function(req, res) {
