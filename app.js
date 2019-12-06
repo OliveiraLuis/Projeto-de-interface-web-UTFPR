@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var relatorio = require('./routes/relatorio');
 var passagem = require('./routes/passagem');
 var routes = require('./routes/index');
 var aviao = require('./routes/aviao');
@@ -27,6 +28,7 @@ app.use('/', routes);
 app.use('/aviao', aviao);
 app.use('/voo', voo);
 app.use('/passagem', passagem);
+app.use('/relatorio', relatorio);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
